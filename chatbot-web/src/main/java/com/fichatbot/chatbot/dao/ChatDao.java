@@ -14,14 +14,14 @@ import com.google.gson.Gson;
 
 public class ChatDao {
 	private static final String OPEN_API_URL = "http://aiopen.etri.re.kr:8000/Dialog";
-	private static final String ACCESS_KEY = "cdc949b2-648d-4c69-977c-b6be16a2b8de";    // �߱޹��� API Key	// �������� Ű: 417ac904-4b08-4ba6-9f5e-ea214b0994ad
+	private static final String ACCESS_KEY = "cdc949b2-648d-4c69-977c-b6be16a2b8de";
 
 	public String open() {
 		String openApiURL = OPEN_API_URL;
-        String accessKey = ACCESS_KEY;    // �߱޹��� API Key
-        String domain = "Benefit";          // ������ ��
-        String access_method = "internal_data";   // ������ ���
-        String method = "open_dialog";                      // method ȣ�� ���
+        String accessKey = ACCESS_KEY;
+        String domain = "Benefit";
+        String access_method = "internal_data";
+        String method = "open_dialog";
         Gson gson = new Gson();
  
         Map<String, Object> request = new HashMap<>();
@@ -72,7 +72,7 @@ public class ChatDao {
 	
 	public String message(Map map) {
 		String openApiURL = OPEN_API_URL;
-        String accessKey = ACCESS_KEY;    // 발급받은 API Key
+        String accessKey = ACCESS_KEY;
         String uuid = (String)map.get("uuid");  // Open Dialog로 부터 생성된 UUID
         String method = "dialog";           // method 호출 방식
         String text = (String)map.get("text");          // method 호출 방식
