@@ -1,4 +1,4 @@
-package com.fichatbot.chatbot;
+package com.fichatbot.chatbot.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
