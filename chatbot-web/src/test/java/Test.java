@@ -21,17 +21,17 @@ public class Test {
 		submap.put("semi", semiList);
 		submap.put("final", finalList);
 		
-		map.put("person", "���");
-		map.put("sports","�߱�");
+		map.put("person", "사람");
+		map.put("sports","야구");
 		map.put("score", submap);
 		
 		Map<String, Object> map2 = new HashMap<>();
-		map2.put("person", "���2");
-		map2.put("sports", "�౸2");
+		map2.put("person", "사람2");
+		map2.put("sports", "축구");
 		
 		Map<String, Object> map3 = new HashMap<>();
-		map3.put("person", "���3");
-		map3.put("sports", "��");
+		map3.put("person", "사람3");
+		map3.put("sports", "농구");
 		
 		list.add(map);
 		list.add(map2);

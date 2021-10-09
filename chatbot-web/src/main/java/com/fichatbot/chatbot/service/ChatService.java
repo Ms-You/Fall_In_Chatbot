@@ -1,9 +1,12 @@
 package com.fichatbot.chatbot.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -55,13 +58,15 @@ public class ChatService {
     }
 
     @SuppressWarnings("unchecked")
-	public Map<String, Object> message(Map<String, Object> data) {
+	public Map<String, Object> message(Map<String, Object> data, HttpServletRequest servletReq) {
 		
 		Map<String, Object> question = (Map<String, Object>)data.get("question");
 		
 		Map<String, String> req = new HashMap<>();
 		req.put("text", (String)question.get("text"));
 		req.put("uuid", (String)data.get("uuid"));
+		
+		String folderName = servletReq.getSession().getServletContext().getRealPath("/") + "resources" + File.separator + "tts";
 		
 		String json = chatDao.message(req);
     	ObjectMapper mapper = new ObjectMapper();
@@ -75,7 +80,6 @@ public class ChatService {
 			Map<String, Object> submap = new HashMap<String, Object>();
 			
 			String uuid = (String) return_object.get("uuid");
-			
 			String text = (String) result.get("system_text");
 			
 			submap.put("id", "user");
@@ -85,6 +89,7 @@ public class ChatService {
 			res.put("text", text);
 			res.put("createdAt", new Date());
 			res.put("user", submap);
+			res.put("ttsUrl", chatDao.tts(folderName, text));
 			
 			
 		} catch (JsonParseException e) {
