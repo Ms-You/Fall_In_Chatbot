@@ -35,9 +35,6 @@ public class KakaoTTS{
                 responseCode = con.getResponseCode();
                 InputStream is = con.getInputStream();
  
-                System.out.println("[responseCode] " + responseCode);
-                System.out.println(is);
- 
         } catch (MalformedURLException e) {
                 e.printStackTrace();
         } catch (IOException e) {

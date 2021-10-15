@@ -8,18 +8,19 @@ const Main = () => {
 // 2. Link to
     const history = useHistory();
 
-    const selectStore = (num) => {
+    const selectStore = (store) => {
         history.push({
           pathname: "/vchat",
-          props: { num:num }
+          props: { store:store }
         });
     };
 
     return(
         <div className="main">
             <h1 style = {{fontSize: '4rem'}}>통신사 챗봇 서비스</h1>
-            <Button variant="contained" onClick={()=>selectStore(1)}>서울지점</Button>
-            <Button variant="contained" onClick={()=>selectStore(2)}>경기지점</Button>
+            <Button variant="contained" onClick={()=>selectStore("SKT")}>SKT</Button>
+            <Button variant="contained" onClick={()=>selectStore("KT")}>KT</Button>
+            <Button variant="contained" onClick={()=>selectStore("LG")}>LG</Button>
             {/* <Link to="/chat">
                 <button>채팅 화면으로 이동</button>
             </Link> */}

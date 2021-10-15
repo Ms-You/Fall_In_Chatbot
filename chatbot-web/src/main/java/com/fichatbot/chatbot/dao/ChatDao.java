@@ -59,10 +59,7 @@ public class ChatDao {
                 byte[] buffer = new byte[is.available()];
                 int byteRead = is.read(buffer);
                 responBody = new String(buffer);
- 
-                System.out.println("[responseCode] " + responseCode);
-                System.out.println("[responBody]");
-                System.out.println(responBody);
+
  
         } catch (MalformedURLException e) {
                 e.printStackTrace();

@@ -46,7 +46,7 @@ const Vchat = ({location}) => {
         fetch(url, {method:"POST", body: JSON.stringify({question:answer, uuid:uuid}), headers:{"Access-Control-Allow-Origin":"*", "Content-Type":"application/json"} })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data.uuid);
+                console.log(data);
                 tts(data.ttsUrl);
                 setMessages(messages => [...messages, data]); // 답변
             }).catch(() => {
@@ -56,22 +56,34 @@ const Vchat = ({location}) => {
 
     const openChat = () => {
 
-        const storeNum = location.props &&location.props.num;
+        const store = location.props &&location.props.store;
 
         const url = `http://localhost:8080/chatbot/chat/open`;
-        fetch(url, {method:"POST", body:JSON.stringify({num:storeNum}), headers:{"Access-Control-Allow-Origin":"*", "Content-Type":"application/json"} })
+        fetch(url, {method:"POST", body:JSON.stringify({store:store}), headers:{"Access-Control-Allow-Origin":"*", "Content-Type":"application/json"} })
             .then((res) => res.json())
             .then((data) => {
+                console.log(data);
                 setUuid(data.uuid);
                 setMessages(messages => [...messages, data]);
             })
             .catch(() => {
-                console.log("에러발생");
+                alert("서버 켜있는지 확인");
             });
     };
 
     useEffect(openChat, []);
     // 3. html 코드 렌더링
+    const handClick = () =>{
+        getAnswer();
+    }
+
+    const handClickPress=(e)=>{
+        if(e.key==='Enter'){
+            handClick();
+            e.target.value="";
+        }
+    }
+
 
     return(
         <Card sx={{height:'96vh', marginTop:'1vh'}}>
@@ -85,8 +97,9 @@ const Vchat = ({location}) => {
             </CardContent>
             <CardContent>
                 <Input
-                    placeholder="Type here..."
-                    multiline={true}
+                    onKeyPress={handClickPress}
+                    placeholder="챗봇에게 메시지 보내기"
+                    multiline={false}
                     defaultValue={result}
                     onChange={(e)=>setQuestion(e.target.value)}
                     leftButtons={
@@ -97,7 +110,7 @@ const Vchat = ({location}) => {
         				/>
                     }
                     rightButtons={
-                        <IconButton aria-label="전송" onClick={()=>getAnswer()}><SendIcon/></IconButton>
+                        <IconButton aria-label="전송" onClick={handClick}><SendIcon/></IconButton>
                     }
                 />
             </CardContent>
